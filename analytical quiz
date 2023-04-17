@@ -1,0 +1,41 @@
+# Define the questions that will be asked in the questionnaire
+questions = [
+    "When faced with a problem, do you tend to approach it logically or intuitively?",
+    "How often do you come up with new ideas or creative solutions to problems?",
+    "Do you enjoy analyzing data and identifying patterns?",
+    "Are you comfortable working with abstract concepts and ideas?",
+    "Do you prefer structured tasks or open-ended tasks?",
+    "When making decisions, do you rely more on facts or intuition?",
+    "Do you enjoy brainstorming and idea generation sessions?",
+    "Are you able to see connections between seemingly unrelated things?",
+    "Do you enjoy exploring new ideas and concepts?",
+    "When given a task, do you tend to follow a set process or try new approaches?",
+]
+
+# Define a function to ask the user a question and get their answer
+def ask_question(question):
+    while True:
+        answer = input(question + " (y/n): ").strip().lower()
+        if answer == "y":
+            return True
+        elif answer == "n":
+            return False
+        else:
+            print("Invalid answer, please enter 'y' or 'n'.")
+
+# Ask the user each question and record their answers
+answers = []
+for question in questions:
+    answers.append(ask_question(question))
+
+# Calculate the percentage of analytical and creative thinking based on the user's answers
+num_analytical = sum(answers[:5]) + sum(answers[8:9]) # The first five questions and the ninth question are more analytical
+num_creative = sum(answers[1:2]) + sum(answers[3:4]) + sum(answers[6:7]) + sum(answers[9:]) # The second, fourth, seventh, and tenth questions are more creative
+
+percent_analytical = (num_analytical / len(answers)) * 100
+percent_creative = (num_creative / len(answers)) * 100
+
+# Print the user's results
+print("Your results:")
+print(f"Analytical: {percent_analytical:.1f}%")
+print(f"Creative: {percent_creative:.1f}%")
